@@ -1,1 +1,26 @@
 /* RankingTable.css */
+/* Works on Chrome, Edge, and Safari */
+::-webkit-scrollbar {
+   
+    width: 3px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #cfcfcf;
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+  /* Works on Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #cfcfcf #f1f1f1;
+  }
+  
