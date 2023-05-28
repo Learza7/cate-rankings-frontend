@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Modal from "react-modal"
 
 function RankingTable() {
   const [players, setPlayers] = useState([]);
@@ -30,22 +31,26 @@ function RankingTable() {
   };
 
   return (
+  
     <>
+    {/* <Modal isOpen={true} ariaHideApp={false} onRequestClose={}>
+      hey
+      </Modal> */}
       <div className="overflow-hidden shadow-lg rounded-lg">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-200">
             <tr>
               <th scope="col" className="px-6 py-3 text-left text-m font-semibold text-gray-600 uppercase tracking-wider cursor-pointer" onClick={() => sortData('lastName')}>
-                Name <span className="inline-block ml-2">{sortConfig && sortConfig.field === 'lastName' ? (sortConfig.direction === 'ascending' ? '↑' : '↓') : ' '}</span>
+                Name<span className="inline-block ml-2">{sortConfig && sortConfig.field === 'lastName' ? (sortConfig.direction === 'ascending' ? '↑' : '↓') : '  '}</span>
               </th>
               <th scope="col" className="px-6 py-3 text-left text-m font-semibold text-gray-600 uppercase tracking-wider cursor-pointer" onClick={() => sortData('classical')}>
-                Classical <span className="inline-block ml-2">{sortConfig && sortConfig.field === 'classical' ? (sortConfig.direction === 'ascending' ? '↑' : '↓') : ' '}</span>
+                Classical<span className="inline-block ml-2">{sortConfig && sortConfig.field === 'classical' ? (sortConfig.direction === 'ascending' ? '↑' : '↓') : '  '}</span>
               </th>
               <th scope="col" className="px-6 py-3 text-left text-m font-semibold text-gray-600 uppercase tracking-wider cursor-pointer" onClick={() => sortData('rapid')}>
-                Rapid <span className="inline-block ml-2">{sortConfig && sortConfig.field === 'rapid' ? (sortConfig.direction === 'ascending' ? '↑' : '↓') : ' '}</span>
+                Rapid<span className="inline-block ml-2">{sortConfig && sortConfig.field === 'rapid' ? (sortConfig.direction === 'ascending' ? '↑' : '↓') : '  '}</span>
               </th>
               <th scope="col" className="px-6 py-3 text-left text-m font-semibold text-gray-600 uppercase tracking-wider cursor-pointer" onClick={() => sortData('blitz')}>
-                Blitz <span className="inline-block ml-2">{sortConfig && sortConfig.field === 'blitz' ? (sortConfig.direction === 'ascending' ? '↑' : '↓') : ' '}</span>
+                Blitz<span className="inline-block ml-2">{sortConfig && sortConfig.field === 'blitz' ? (sortConfig.direction === 'ascending' ? '↑' : '↓') : '  '}</span>
               </th>
             </tr>
           </thead>
