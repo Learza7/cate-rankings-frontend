@@ -29,3 +29,9 @@ npm install
 ```bash
 npm run dev
 ```
+
+## Work in progress
+- Improve modal UI for games (add signal to show where clickable)
+- Add elo graph with selectors etc
+- add responsive design
+- improve general ui
