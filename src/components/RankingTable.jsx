@@ -14,7 +14,8 @@ function RankingTable() {
 
 
   useEffect(() => {
-    fetch("http://localhost:3000/players")
+    
+    fetch("https://cate-rankings-backend.herokuapp.com/players")
       .then((response) => response.json())
       .then((data) => setPlayers(data));
   }, []);
@@ -45,7 +46,7 @@ function RankingTable() {
   const openModal = (player) => {
     console.log(player);  // logs the player when the modal opens
   
-    fetch(`http://localhost:3000/players/${player.fideId}/tournaments`)
+    fetch(`https://cate-rankings-backend.herokuapp.com/players/${player.fideId}/tournaments`)
       .then((response) => response.json())
       .then((data) => {
         // Add the tournaments data to the player object, and then set it as currentPlayer
