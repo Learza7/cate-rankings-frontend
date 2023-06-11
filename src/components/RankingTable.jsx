@@ -97,7 +97,7 @@ function RankingTable() {
         <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-900 shadow-md bg-white bg-opacity-20"></div>
       </div>
         ) : (
-          <div className="overflow-x-scroll md:overflow-x-auto rounded-lg">
+          <div className="overflow-x-scroll md:overflow-x-auto rounded-lg shadow-lg">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-200 sticky top-0">
                 <tr>
