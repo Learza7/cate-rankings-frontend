@@ -1,18 +1,23 @@
 import { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import TournamentList from './TournamentList';
-import './RankingTable.css';
+import '../styles/RankingTable.css'
+
+import Loading from './Loading';
+import TournamentModal from './TournamentModal';
 
 Modal.setAppElement('#root');
 
 function RankingTable() {
+  const [loading, setLoading] = useState(true);
+
   const [players, setPlayers] = useState([]);
+
   const [sortConfig, setSortConfig] = useState(null);
 
-  const [modalOpen, setModalOpen] = useState(false);
-  const [currentPlayer, setCurrentPlayer] = useState(null);
-
-  const [loading, setLoading] = useState(true);
+  const [tournamentModalOpen, setTournamentModalOpen] = useState(false);  // this is the modal that opens when you click on a player's elo in the table if variation
+  const [selectedPlayer, setSelectedPlayer] = useState(null);  // this is the player that is selected when you click on a player's elo in the table if variation
+  const [selectedTimeControl, setSelectedTimeControl] = useState(null);  // this is the time control that is selected when you click on a player's elo in the table if variation
 
   useEffect(() => {
 
@@ -47,19 +52,14 @@ function RankingTable() {
     return 0;
   });
 
-  const openModal = (player) => {
-    console.log(player);  // logs the player when the modal opens
+  const openModal = (player, timeControl) => {
 
-    fetch(`https://cate-rankings-backend.herokuapp.com/players/${player.fideId}/tournaments`)
-      .then((response) => response.json())
-      .then((data) => {
-        // Add the tournaments data to the player object, and then set it as currentPlayer
-        const playerWithTournaments = { ...player, tournaments: data };
-        console.log(playerWithTournaments);  // logs the player with the tournaments data
-        setCurrentPlayer(playerWithTournaments);
-      });
+    setSelectedPlayer(player);
+    setSelectedTimeControl(timeControl);
 
-    setModalOpen(true);
+    setTournamentModalOpen(true);
+
+    
   };
 
   const closeModal = () => {
@@ -93,17 +93,16 @@ function RankingTable() {
 
       {
         loading ? (
-          <div className="flex justify-center items-center h-96">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-900 shadow-md bg-white bg-opacity-20"></div>
-      </div>
+          <div className="mt-28"><Loading /></div>
+          
         ) : (
           <div className="overflow-x-scroll md:overflow-x-auto rounded-lg shadow-lg">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-200 sticky top-0">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-200 sticky top-0">
                 <tr>
-                <th scope="col" className="px-2 md:px-6 py-3 text-left md:text-m font-semibold text-gray-600 uppercase tracking-wider cursor-pointer" onClick={() => sortData('lastName')}>
-                  Name<span className="inline-block ml-2">{sortConfig && sortConfig.field === 'lastName' ? (sortConfig.direction === 'ascending' ? '↑' : '↓') : '  '}</span>
-                </th>
+                  <th scope="col" className="px-2 md:px-6 py-3 text-left md:text-m font-semibold text-gray-600 uppercase tracking-wider cursor-pointer" onClick={() => sortData('lastName')}>
+                    Name<span className="inline-block ml-2">{sortConfig && sortConfig.field === 'lastName' ? (sortConfig.direction === 'ascending' ? '↑' : '↓') : '  '}</span>
+                  </th>
                   <th scope="col" className="px-2 md:px-6 py-3 text-left md:text-m font-semibold text-gray-600 uppercase tracking-wider cursor-pointer" onClick={() => sortData('classical')}>
                     Classical<span className="inline-block ml-2">{sortConfig && sortConfig.field === 'classical' ? (sortConfig.direction === 'ascending' ? '↑' : '↓') : '  '}</span>
                   </th>
@@ -119,19 +118,19 @@ function RankingTable() {
                 {sortedPlayers.map((player, index) => (
                   <tr key={player.fideId} className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-gray-100 transition-colors duration-200`}>
                     <td className="px-6 py-4 whitespace-nowrap text-gray-800">{`${player.lastName} ${player.firstName}`}</td>
-                    <td className={`px-6 py-4 whitespace-nowrap text-gray-800 ${player.classicalVariation !== 0 ? "cursor-pointer" : ""}`} onClick={() => player.classicalVariation !== 0 && openModal(player)}>
+                    <td className={`px-6 py-4 whitespace-nowrap text-gray-800 ${player.classicalVariation !== 0 ? "cursor-pointer" : ""}`} onClick={() => player.classicalVariation !== 0 && openModal(player, 0)}>
                       {`${player.classical != null ? player.classical : ""}`}
                       <span className={`${player.classicalVariation > 0 ? "text-green-500" : "text-red-500"} text-base`}>
                         {player.classicalVariation !== 0 ? ' (' + (player.classicalVariation > 0 ? '↑' : '↓') + Math.abs(player.classicalVariation) + ')' : ''}
                       </span>
                     </td>
-                    <td className={`px-6 py-4 whitespace-nowrap text-gray-800 ${player.rapidVariation !== 0 ? "cursor-pointer" : ""}`} onClick={() => player.rapidVariation !== 0 && openModal(player)}>
+                    <td className={`px-6 py-4 whitespace-nowrap text-gray-800 ${player.rapidVariation !== 0 ? "cursor-pointer" : ""}`} onClick={() => player.rapidVariation !== 0 && openModal(player, 1)}>
                       {`${player.rapid != null ? player.rapid : ""}`}
                       <span className={`${player.rapidVariation > 0 ? "text-green-500" : "text-red-500"} text-base`}>
                         {player.rapidVariation !== 0 ? ' (' + (player.rapidVariation > 0 ? '↑' : '↓') + Math.abs(player.rapidVariation) + ')' : ''}
                       </span>
                     </td>
-                    <td className={`px-6 py-4 whitespace-nowrap text-gray-800 ${player.blitzVariation !== 0 ? "cursor-pointer" : ""}`} onClick={() => player.blitzVariation !== 0 && openModal(player)}>
+                    <td className={`px-6 py-4 whitespace-nowrap text-gray-800 ${player.blitzVariation !== 0 ? "cursor-pointer" : ""}`} onClick={() => player.blitzVariation !== 0 && openModal(player, 2)}>
                       {`${player.blitz != null ? player.blitz : ""}`}
                       <span className={`${player.blitzVariation > 0 ? "text-green-500" : "text-red-500"} text-base`}>
                         {player.blitzVariation !== 0 ? ' (' + (player.blitzVariation > 0 ? '↑' : '↓') + Math.abs(player.blitzVariation) + ')' : ''}
@@ -150,25 +149,7 @@ function RankingTable() {
 
 
 
-      <Modal
-        isOpen={modalOpen}
-        onRequestClose={closeModal}
-        contentLabel="Player Details"
-        style={customStyles}
-      >
-        {currentPlayer &&
-          <div className="relative">
-            {/* <h2>{`${currentPlayer.lastName} ${currentPlayer.firstName}`}</h2> */}
-            <TournamentList tournaments={currentPlayer.tournaments} />
-            {/* <button 
-        onClick={closeModal} 
-        className="absolute top-1 right-1 bg-blue-500 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-700 transition duration-200"
-      >
-        X
-      </button> */}
-          </div>
-        }
-      </Modal>
+      <TournamentModal show={tournamentModalOpen} player={selectedPlayer} timeControl={selectedTimeControl} onClose={() => setTournamentModalOpen(false)}/>
     </>
   );
 }

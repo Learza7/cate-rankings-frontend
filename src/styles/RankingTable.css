@@ -24,3 +24,12 @@
     scrollbar-color: #cfcfcf #f1f1f1;
   }
   
+  *, ::before ::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  
+  
+ 
