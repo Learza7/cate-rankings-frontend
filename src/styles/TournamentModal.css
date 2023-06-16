@@ -111,6 +111,7 @@
 
   .modal {
     max-width: 95%;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -121,7 +122,8 @@
     /* max-width: 75rem;
     min-height: 15rem; */
     height: fit-content;
-    padding: 1rem;
+    /*padding: 1rem;*/
+    
     border-radius: 3px;
     opacity: 0;
     visibility: hidden;
