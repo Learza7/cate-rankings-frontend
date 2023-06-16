@@ -129,7 +129,7 @@ function RankingTable() {
               <tbody className="bg-white divide-y divide-gray-200">
                 {sortedPlayers.map((player, index) => (
                   <tr key={player.fideId} className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-gray-100 transition-colors duration-200 md:text-lg text-m`}>
-                    <td className="md:px-6 px-1 pl-2 py-4 whitespace-nowrap text-gray-800">{`${player.lastName} ${player.firstName}`}</td>
+                    <td className="md:px-6 px-1 pl-2 py-4 whitespace-wrap text-gray-800">{`${player.lastName} ${player.firstName}`}</td>
                     <td className={`md:px-6 px-1 py-4 whitespace-nowrap text-gray-800 ${player.classicalVariation !== 0 ? "cursor-pointer" : ""}`} onClick={() => player.classicalVariation !== 0 && openModal(player, 0)}>
                       {`${player.classical != null ? player.classical : ""}`}
                       <span className={`${player.classicalVariation > 0 ? "text-green-500" : "text-red-500"} text-base`}>
