@@ -121,7 +121,7 @@ function RankingTable() {
                   <th scope="col" className="px-1 md:px-6 py-3 text-left md:text-m font-semibold text-gray-600 uppercase tracking-wider cursor-pointer" onClick={() => sortData('rapid')}>
                     Rapid<span className="inline-block">{sortConfig && sortConfig.field === 'rapid' ? (sortConfig.direction === 'ascending' ? '↑' : '↓') : '  '}</span>
                   </th>
-                  <th scope="col" className="px-1 md:px-6 py-3 text-left md:text-m font-semibold text-gray-600 uppercase tracking-wider cursor-pointer hidden sm:block" onClick={() => sortData('blitz')}>
+                  <th scope="col" className="pr-4 px-1 md:px-6 py-3 text-left md:text-m font-semibold text-gray-600 uppercase tracking-wider cursor-pointer hidden sm:block" onClick={() => sortData('blitz')}>
                     Blitz<span className="inline-block">{sortConfig && sortConfig.field === 'blitz' ? (sortConfig.direction === 'ascending' ? '↑' : '↓') : '  '}</span>
                   </th>
                 </tr>
