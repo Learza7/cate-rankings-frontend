@@ -121,7 +121,7 @@ function RankingTable() {
                   <th scope="col" className="px-1 md:px-6 py-3 text-left md:text-m font-semibold text-gray-600 uppercase tracking-wider cursor-pointer" onClick={() => sortData('rapid')}>
                     Rapid<span className="inline-block">{sortConfig && sortConfig.field === 'rapid' ? (sortConfig.direction === 'ascending' ? '↑' : '↓') : '  '}</span>
                   </th>
-                  <th scope="col" className="px-1 md:px-6 py-3 text-left md:text-m font-semibold text-gray-600 uppercase tracking-wider cursor-pointer hidden md:block" onClick={() => sortData('blitz')}>
+                  <th scope="col" className="px-1 md:px-6 py-3 text-left md:text-m font-semibold text-gray-600 uppercase tracking-wider cursor-pointer hidden sm:block" onClick={() => sortData('blitz')}>
                     Blitz<span className="inline-block">{sortConfig && sortConfig.field === 'blitz' ? (sortConfig.direction === 'ascending' ? '↑' : '↓') : '  '}</span>
                   </th>
                 </tr>
@@ -142,7 +142,7 @@ function RankingTable() {
                         {player.rapidVariation !== 0 ? ' (' + (player.rapidVariation > 0 ? '↑' : '↓') + Math.abs(player.rapidVariation) + ')' : ''}
                       </span>
                     </td>
-                    <td className={`md:block px-1 md:px-6 py-4 whitespace-nowrap text-gray-800 hidden ${player.blitzVariation !== 0 ? "cursor-pointer" : ""}`} onClick={() => player.blitzVariation !== 0 && openModal(player, 2)}>
+                    <td className={`sm:block px-1 md:px-6 py-4 whitespace-nowrap text-gray-800 hidden ${player.blitzVariation !== 0 ? "cursor-pointer" : ""}`} onClick={() => player.blitzVariation !== 0 && openModal(player, 2)}>
                       {`${player.blitz != null ? player.blitz : ""}`}
                       <span className={`${player.blitzVariation > 0 ? "text-green-500" : "text-red-500"} text-base`}>
                         {player.blitzVariation !== 0 ? ' (' + (player.blitzVariation > 0 ? '↑' : '↓') + Math.abs(player.blitzVariation) + ')' : ''}
