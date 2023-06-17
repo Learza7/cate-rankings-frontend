@@ -13,7 +13,10 @@ function RankingTable() {
 
   const [players, setPlayers] = useState([]);
 
-  const [sortConfig, setSortConfig] = useState(null);
+  const [sortConfig, setSortConfig] = useState({
+    field: 'lastName',
+    direction: 'descending',
+  });
 
   const [tournamentModalOpen, setTournamentModalOpen] = useState(false);  // this is the modal that opens when you click on a player's elo in the table if variation
   const [selectedPlayer, setSelectedPlayer] = useState(null);  // this is the player that is selected when you click on a player's elo in the table if variation
