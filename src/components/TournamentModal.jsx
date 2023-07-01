@@ -64,7 +64,7 @@ function TournamentModal (props) {
         {tournaments.length === 0 ? (
           <Loading />
         ) : (
-          <div className='modal-content overflow-y-auto max-h-screen space-y-4'>
+          <div className='modal-content overflow-y-auto max-h-screen space-y-4 mt-6'>
             <div className='flex justify-end' onClick={props.onClose}>
               <button className='p-2 rounded-full bg-gray-200 hover:bg-gray-300 focus:bg-gray-300 focus:outline-none'>
                 <svg
