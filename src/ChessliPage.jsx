@@ -31,7 +31,7 @@ const ChessliPage = () => {
         }
       }
     ).then(data => {
-      setGeneratedUrl(data.url)
+      setGeneratedUrl(data.lichess_url)
       setLastGame(data)
       setLoading(false)
     }
