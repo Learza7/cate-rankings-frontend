@@ -46,7 +46,7 @@ const ChessliPage = () => {
         const formData = new URLSearchParams()
         formData.append('pgn', lastGame.pgn)
 
-        fetch('https://lichess.org/api/import', {
+        fetch('https://api.allorigins.win/get?https://lichess.org/api/import', {
           method: 'POST',
           body: formData
         })
