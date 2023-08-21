@@ -22,48 +22,22 @@ const ChessliPage = () => {
     setLoading(true)
     setError('')
 
-    const date = new Date()
+    fetch("https://cate-rankings-backend.herokuapp.com/transfer/" + username).then(
+      response => {
+        if (response.ok) {
+          return response.json()
+        } else {
+          setError("No game found for this username for the current month.")
+        }
+      }
+    ).then(data => {
+      setGeneratedUrl(data.url)
+      setLastGame(data)
+      setLoading(false)
+    }
+    )
 
-    const year = date.getFullYear()
-    const month = date.getMonth().toString().padStart(2, '0')
-
-    fetch(`https://api.chess.com/pub/player/${username}/games/${year}/${month}`)
-      .then(response => {
-        console.log(response)
-        return response.json()
-      })
-      .catch(error => {
-        console.log(error)
-        setError(error.message)
-        setLoading(false)
-        return error
-      })
-      .then(data => {
-        let lastGame = data.games[data.games.length - 1]
-
-        setLastGame(lastGame)
-
-        const formData = new URLSearchParams()
-        formData.append('pgn', lastGame.pgn)
-
-        fetch('https://api.allorigins.win/get?https://lichess.org/api/import', {
-          method: 'POST',
-          body: formData
-        })
-          .then(response => {
-            return response
-          })
-          .then(data => {
-            console.log(data)
-            setGeneratedUrl(data.url)
-            setLoading(false)
-          })
-      })
-      .catch(error => {
-        console.log(error)
-        setError('No game found for this username over the last month.')
-        setLoading(false)
-      })
+    
   }
 
   return (
