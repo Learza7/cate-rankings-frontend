@@ -2,6 +2,8 @@
 
 This project is a React.js application that fetches and displays a list of chess players and their respective rankings in a table format. It uses Tailwind CSS for styling and provides a modern, professional-looking user interface.
 
+It is hosted on Vercel and it is accessible at https://cate-rankings.fr
+
 ## Features
 
 - Fetches player data from the backend server
