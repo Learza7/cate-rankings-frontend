@@ -69,10 +69,10 @@ function RankingTable() {
 
   const openModal = (player, timeControl) => {
 
-    setSelectedPlayer(player);
-    setSelectedTimeControl(timeControl);
+    // setSelectedPlayer(player);
+    // setSelectedTimeControl(timeControl);
 
-    setTournamentModalOpen(true);
+    // setTournamentModalOpen(true);
 
     
   };
