@@ -21,7 +21,7 @@ function RankingTable() {
   const [tournamentModalOpen, setTournamentModalOpen] = useState(false);  // this is the modal that opens when you click on a player's elo in the table if variation
   const [selectedPlayer, setSelectedPlayer] = useState(null);  // this is the player that is selected when you click on a player's elo in the table if variation
   const [selectedTimeControl, setSelectedTimeControl] = useState(null);  // this is the time control that is selected when you click on a player's elo in the table if variation
-
+  const [modalContent, setModalContent] = useState(null);  // this is the content of the modal that opens when you click on a player's elo in the table if variation
   useEffect(() => {
 
     fetch("https://cate-rankings-backend.herokuapp.com/players")
@@ -68,18 +68,16 @@ function RankingTable() {
   
 
   const openModal = (player, timeControl) => {
-
-    // setSelectedPlayer(player);
-    // setSelectedTimeControl(timeControl);
-
-    // setTournamentModalOpen(true);
+    // set modal content with html but replace <img src=/imga/clr_bl.gif border=0 align=absbottom> by a black circle and <img src=/imga/clr_wh.gif border=0 align=absbottom> by a white circle
+    setModalContent({__html: player.tournaments[timeControl].replace(/<img src=\/imga\/clr_bl.gif border=0 align=absbottom>/g, '⚫').replace(/<img src=\/imga\/clr_wh.gif border=0 align=absbottom>/g, '⚪')});
+    setTournamentModalOpen(true);
 
     
   };
 
   const closeModal = () => {
-    setModalOpen(false);
-    setCurrentPlayer(null);
+    setTournamentModalOpen(false);
+    setModalContent(null);
   };
 
   const customStyles = {
@@ -162,9 +160,15 @@ function RankingTable() {
           </div>)
       }
 
-
-
-      <TournamentModal show={tournamentModalOpen} player={selectedPlayer} timeControl={selectedTimeControl} onClose={() => setTournamentModalOpen(false)}/>
+      {/* I need a modal whose content is set in modalContent (plain html text) */}
+      <Modal
+        isOpen={tournamentModalOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Tournament Modal">
+        <div dangerouslySetInnerHTML={modalContent}></div>
+      </Modal>
+     
     </>
   );
 }
