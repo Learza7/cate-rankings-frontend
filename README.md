@@ -1,7 +1,7 @@
 # cate-rankings-frontend
 
 This is the frontend of the website that I created for my chess club (CATE - Cercle Airbus Toulouse Échecs).
-It is hosted on Vercel and it is accessible at https://cate-rankings.fr
+It is hosted on Vercel and it is accessible at [https://cate-rankings.fr](https://cate-rankings.vercel.app/)
 
 This is a React.js application that fetches and displays a list of chess players and their respective rankings in a table format. It uses Tailwind CSS for styling and provides a modern, professional-looking user interface.
 
